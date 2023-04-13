@@ -29,7 +29,17 @@ model.summary()
 model.compile(loss='mean_squared_error', optimizer=keras.optimizers.Adam(0.1))
 
 # Навчаємо модель на вхідних даних
-model.fit(x = x_train, y = y_train, epochs=10000, batch_size=101)
+history = model.fit(x = x_train, y = y_train, epochs=10000, batch_size=101)
+
+# Отримуємо значення функції втрат на кожній епосі тренування
+loss = history.history['loss']
+
+# Виводимо значення функції втрат
+plt.plot(loss)
+plt.xlabel('Епоха')
+plt.ylabel('Значення функції втрат')
+plt.title('Зміна функції втрат на кожній епосі тренування')
+plt.show()
 
 # Проводимо апроксимацію на тестових даних навчання
 # Виконуємо передбачення за допомогою моделі
